@@ -1,0 +1,34 @@
+{
+  "name": "koa-blog-api",
+  "version": "1.0.0",
+  "description": "Service api for nuxt-blog-web",
+  "repository": "https://github.com/BlogExplore/koa-blog-api.git",
+  "author": "vast <leaderywl@163.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon ./app/app.js"
+  },
+  "dependencies": {
+    "@commitlint/cli": "^12.1.1",
+    "@commitlint/config-conventional": "^12.1.1",
+    "axios": "^0.21.1",
+    "dotenv": "^8.2.0",
+    "husky": "^6.0.0",
+    "koa": "^2.13.1",
+    "koa-router": "^10.0.0"
+  },
+  "devDependencies": {
+    "cz-conventional-changelog": "^3.3.0",
+    "nodemon": "^2.0.7"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $GIT_PARAMS"
+    }
+  }
+}
