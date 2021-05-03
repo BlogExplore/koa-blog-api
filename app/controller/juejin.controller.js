@@ -20,10 +20,12 @@ class JJController {
       obj.user_id = obj.jj_user_id
       delete obj.jj_user_id
     }
-    const res = await axios(JJ_FANS_URL, {
+    const { data } = await axios(JJ_FANS_URL, {
       params: obj,
     })
-    ctx.body = res.data
+    console.log(data)
+    ctx.body = `请求掘金的粉丝成功`
+    ctx.body = data
   }
 }
 
