@@ -1,8 +1,10 @@
 const Router = require('koa-router')
 
-const jjRouter = new Router()
+const jjRouter = new Router({
+  prefix: '/api/v1/juejin',
+})
 
-const { fetchFans } = require('../controller/juejin.controller')
-jjRouter.get('/jjFans', fetchFans)
+const { followsList, fans } = require('../controller/juejin.controller')
+jjRouter.get('/follows', followsList)
 
 module.exports = jjRouter

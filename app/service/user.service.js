@@ -22,8 +22,6 @@ class UserService {
   }
 
   async list(offset, size) {
-    console.log(offset)
-    console.log(size)
     // const res = await connection.execute(sqlMap['list'], [offset, size])
   }
 }

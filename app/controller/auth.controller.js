@@ -3,8 +3,6 @@ const jwt = require('jsonwebtoken')
 const { PRIVATE_KEY } = require('../config/index')
 class AuthController {
   async login(ctx, next) {
-    console.log(ctx.user)
-
     const { id, username } = ctx.user
 
     const TOKEN = jwt.sign({ id, username }, PRIVATE_KEY, {
