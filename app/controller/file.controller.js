@@ -1,6 +1,6 @@
 class FileController {
   async saveFile(ctx, next) {
-    console.log(ctx.req.file)
+    console.log(ctx)
   }
 }
 
