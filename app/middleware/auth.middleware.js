@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken')
 const {
   USER_NAME_KEY_NULL,
   PWD_KEY_NULL,
@@ -41,6 +42,7 @@ const verifyLogin = async (ctx, next) => {
     const error = new Error(PWD_IS_ERR)
     return ctx.app.emit('error', error, ctx)
   }
+
   ctx.user = findUserArr[0]
   await next()
 }
@@ -52,14 +54,15 @@ const verifyAuth = async (ctx, next) => {
     return ctx.app.emit('error', error, ctx)
   }
   const token = authorization.replace('Bearer ', '')
-
   try {
     const result = jwt.verify(token, PUBLIC_PEM, {
       algorithms: ['RS256'],
     })
+    console.log('result', result)
     ctx.user = result
     await next()
   } catch (err) {
+    console.log(`进入到这儿`)
     const error = new Error(UN_PERMISSION)
     ctx.app.emit('error', error, ctx)
   }

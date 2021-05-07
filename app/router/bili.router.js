@@ -1,4 +1,4 @@
-const Router = require('koa-router')
+const Router = require('@koa/router')
 
 const BiLiRouter = new Router({
   prefix: '/api/v1/bili',

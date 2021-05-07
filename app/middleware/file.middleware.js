@@ -1,4 +1,4 @@
-const Multer = require('koa-multer')
+const Multer = require('@koa/multer')
 const { AVATAR_PATH } = require('../constants/filePath')
 
 const upload = Multer({

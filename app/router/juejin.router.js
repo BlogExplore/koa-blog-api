@@ -1,4 +1,4 @@
-const Router = require('koa-router')
+const Router = require('@koa/router')
 
 const jjRouter = new Router({
   prefix: '/api/v1/juejin',
