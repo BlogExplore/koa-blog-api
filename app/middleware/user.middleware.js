@@ -7,6 +7,12 @@ const {
 } = require('../constants/errorTypes')
 const passwordHandler = require('../extend/passwordHandler')
 const userService = require('../service/user.service')
+/**
+ * @description 判断用户名有没有注册过
+ * @param {*} ctx
+ * @param {*} next
+ * @returns
+ */
 const authenticateUser = async (ctx, next) => {
   const userParams = ctx.request.body
   if (!('username' in userParams)) {

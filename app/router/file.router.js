@@ -1,4 +1,4 @@
-const Router = require('koa-router')
+const Router = require('@koa/router')
 
 const { saveFile } = require('../controller/file.controller')
 const { avatarHandler } = require('../middleware/file.middleware')

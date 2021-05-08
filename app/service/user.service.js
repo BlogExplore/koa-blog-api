@@ -1,9 +1,9 @@
 const connection = require('../config/db')
 
 const sqlMap = new Map([
-  ['create', `INSERT INTO user (username, password) VALUES (?, ?);`],
-  ['getPer', `SELECT * FROM user WHERE username = ?;`],
-  ['list', `SELECT u.id id,u.username username,FROM user u LIMIT ?, ?;`],
+  ['create', `INSERT INTO users (username, password) VALUES (?, ?);`],
+  ['getPer', `SELECT * FROM users WHERE username = ?;`],
+  ['list', `SELECT u.id id,u.username username,FROM users u LIMIT ?, ?;`],
 ])
 
 class UserService {

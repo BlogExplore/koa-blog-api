@@ -1,4 +1,4 @@
-const Router = require('koa-router')
+const Router = require('@koa/router')
 const {
   authenticateUser,
   passwordEncryption,
@@ -6,12 +6,14 @@ const {
 const { verifyAuth } = require('../middleware/auth.middleware')
 
 const userRouter = new Router({
-  prefix: '/user',
+  prefix: '/api/v1/user',
 })
 
 const { create, list } = require('../controller/user.controller')
-// 用户注册
+/**
+ * @description 用户注册
+ * @middlewares 判断用户名有没有注册过 密码加密后存储
+ */
 userRouter.post('/register', authenticateUser, passwordEncryption, create)
-// 获取用户列表
-userRouter.get('/list', list)
+
 module.exports = userRouter
