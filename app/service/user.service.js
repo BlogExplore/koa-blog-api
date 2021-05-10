@@ -1,28 +1,41 @@
 const connection = require('../config/db')
-
+const { _formatUser } = require('../utils/formatUser')
 const sqlMap = new Map([
-  ['create', `INSERT INTO users (username, password) VALUES (?, ?);`],
-  ['getPer', `SELECT * FROM users WHERE username = ?;`],
+  [
+    'createUser',
+    `INSERT INTO users (username, password,gender) VALUES (?, ?, ?);`,
+  ],
+  ['getUserInfo', `SELECT * FROM users WHERE username = ?;`],
   ['list', `SELECT u.id id,u.username username,FROM users u LIMIT ?, ?;`],
 ])
 
 class UserService {
-  async create(userInfo) {
-    const { password, username } = userInfo
-    const result = await connection.execute(sqlMap.get('create'), [
+  async createUser({ username, password, gender }) {
+    // 密码需要加密
+    const result = await connection.execute(sqlMap.get('createUser'), [
       username,
       password,
+      gender,
     ])
     return result[0]
   }
-
-  async getUserByName(username) {
-    const result = await connection.execute(sqlMap.get('getPer'), [username])
-    return result[0]
-  }
-
-  async list(offset, size) {
-    // const res = await connection.execute(sqlMap['list'], [offset, size])
+  /**
+   * @description 获取用户信息
+   * @param {*} username
+   * @param {*} password
+   * @returns
+   */
+  async getUserInfo(username, password) {
+    // 查到注册时候用户名
+    const [result] = await connection.execute(sqlMap.get('getUserInfo'), [
+      username,
+    ])
+    if (!result) {
+      // 没有找到
+      return result
+    }
+    const formatRes = _formatUser(result[0])
+    return formatRes
   }
 }
 
