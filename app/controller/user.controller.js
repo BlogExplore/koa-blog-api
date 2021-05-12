@@ -1,16 +1,10 @@
 // const Controller = require('../core/controller')
 const userService = require('../service/user.service')
 const { ErrorModel, SuccessModel } = require('../core/ResModel')
-const { registerUserNameExit, registerFail } = require('../constants/errorInfo')
+const { registerFail } = require('../constants/errorInfo')
 class UserController {
   async register({ username, password, gender }) {
-    // 获取用户信息
-    const userInfo = await userService.getUserInfo(username, password)
-    if (userInfo) {
-      // 用户已经存在
-      console.log(registerUserNameExit)
-      return new ErrorModel(registerUserNameExit)
-    }
+    console.log(`执行注册`)
     // 新增用户
     try {
       await userService.createUser({ username, password, gender })

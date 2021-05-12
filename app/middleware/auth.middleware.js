@@ -9,7 +9,7 @@ const {
   UN_PERMISSION,
 } = require('../constants/errorTypes')
 const { PUBLIC_PEM } = require('../config/index')
-const passwordHandler = require('../extend/passwordHandler')
+// const passwordHandler = require('../extend/passwordHandler')
 const userService = require('../service/user.service')
 const verifyLogin = async (ctx, next) => {
   const userParams = ctx.request.body

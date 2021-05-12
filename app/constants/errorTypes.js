@@ -10,6 +10,7 @@ const PWD_IS_ERR = '密码错误'
 const TOKEN_INVALID = '无效的Token'
 const UN_PERMISSION = '没有权限联系管理员'
 const NOT_FOUND = 404
+const JSON_SCHEMA_FAIL = `数据格式校验错误`
 module.exports = {
   USER_NAME_KEY_NULL,
   USER_NAME_VAL_NULL,
@@ -22,4 +23,5 @@ module.exports = {
   UN_PERMISSION,
   NOT_FOUND,
   REGISTER_FAIL,
+  JSON_SCHEMA_FAIL,
 }

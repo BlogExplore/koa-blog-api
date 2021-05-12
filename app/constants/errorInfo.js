@@ -13,4 +13,8 @@ module.exports = {
     code: 10002,
     message: errTypes.REGISTER_FAIL,
   },
+  jsonSchemaFail: {
+    code: 10009,
+    message: errTypes.JSON_SCHEMA_FAIL,
+  },
 }
