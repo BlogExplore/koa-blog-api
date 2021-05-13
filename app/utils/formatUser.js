@@ -10,6 +10,7 @@ function _formatUser(obj) {
     updateAt: obj.updateAt,
     avatarUrl: obj.avatarUrl || `https://yayxs.github.io/avatar.jpg`,
     gender: obj.gender || 3,
+    password: obj.password || '',
   }
 }
 

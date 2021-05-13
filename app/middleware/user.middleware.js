@@ -12,9 +12,9 @@ const whetherUsernameAlreadyExists = async (ctx, next) => {
   const { username, password } = ctx.request.body
   // 获取用户信息
   const userInfo = await userService.getUserInfo(username, password)
-  if (userInfo) {
-    // 用户已经存在
-    return new ErrorModel(registerUserNameExit)
+  if (userInfo.length > 0) {
+    ctx.body = new ErrorModel(registerUserNameExit)
+    return
   }
   await next()
 }
@@ -23,7 +23,6 @@ const whetherUsernameAlreadyExists = async (ctx, next) => {
  */
 const passwordEncryption = async (ctx, next) => {
   const { password } = ctx.request.body
-
   ctx.request.body.password = doCrypto(password)
   await next()
 }

@@ -8,11 +8,10 @@ const ajv = new Ajv({})
  */
 function validate(schema, data = {}) {
   const valid = ajv.validate(schema, data)
-  console.log(valid)
+  console.log('valid', valid)
   if (!valid) {
     return ajv.errors[0]
   } else {
-    console.log(`验证成功`)
   }
 }
 

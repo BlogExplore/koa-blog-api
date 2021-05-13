@@ -13,6 +13,11 @@ module.exports = {
     code: 10002,
     message: errTypes.REGISTER_FAIL,
   },
+  usernameNotExists: {
+    // 用户名不存在
+    code: 10003,
+    message: errTypes.USER_NAME_NOT_ALREADY_EXISTS,
+  },
   jsonSchemaFail: {
     code: 10009,
     message: errTypes.JSON_SCHEMA_FAIL,

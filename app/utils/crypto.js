@@ -13,8 +13,8 @@ function _md5(content) {
   return md5.update(content).digest('hex')
 }
 
-function doCrypto() {
-  const str = `pwd=${content}&key=${CRYPTO_SECRET_KEY}`
+function doCrypto(pwd) {
+  const str = `pwd=${pwd}&key=${CRYPTO_SECRET_KEY}`
   return _md5(str)
 }
 module.exports = doCrypto

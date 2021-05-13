@@ -1,5 +1,6 @@
 const connection = require('../config/db')
 const { _formatUser } = require('../utils/formatUser')
+
 const sqlMap = new Map([
   [
     'createUser',
@@ -27,15 +28,19 @@ class UserService {
    */
   async getUserInfo(username, password) {
     // 查到注册时候用户名
-    const [result] = await connection.execute(sqlMap.get('getUserInfo'), [
-      username,
-    ])
-    if (!result) {
-      // 没有找到
-      return result
+    try {
+      const [res] = await connection.execute(sqlMap.get('getUserInfo'), [
+        username,
+      ])
+      if (res.length === 0) {
+        // 没有找到
+        return res
+      }
+      const formatRes = _formatUser(res[0])
+      return [formatRes]
+    } catch (error) {
+      console.log(error)
     }
-    const formatRes = _formatUser(result[0])
-    return formatRes
   }
 }
 

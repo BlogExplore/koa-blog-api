@@ -3,14 +3,20 @@ const jwt = require('jsonwebtoken')
 const { PRIVATE_KEY } = require('../config/index')
 class AuthController {
   async login(ctx, next) {
-    const { id, username } = ctx.user
+    const {
+      request: {
+        body: { username, password },
+      },
+    } = ctx
 
-    const TOKEN = jwt.sign({ id, username }, PRIVATE_KEY, {
-      expiresIn: 60 * 60 * 24,
-      algorithm: 'RS256',
-    })
+    // const { id, username } = ctx.user
 
-    ctx.body = { id, username, token: TOKEN }
+    // const TOKEN = jwt.sign({ id, username }, PRIVATE_KEY, {
+    //   expiresIn: 60 * 60 * 24,
+    //   algorithm: 'RS256',
+    // })
+
+    // ctx.body = { id, username, token: TOKEN }
   }
 }
 
