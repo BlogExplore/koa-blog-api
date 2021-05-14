@@ -14,6 +14,7 @@ const PRIVATE_KEY = fs.readFileSync(
 const PUBLIC_PEM = fs.readFileSync(path.resolve(__dirname, '../../public.pem'))
 module.exports = {
   APP_PORT,
+  APP_HOST,
   JJ_FANS_URL,
   MYSQL_HOST,
   MYSQL_PORT,

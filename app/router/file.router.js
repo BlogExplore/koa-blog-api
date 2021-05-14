@@ -1,11 +1,14 @@
 const Router = require('@koa/router')
 
-const { saveFile } = require('../controller/file.controller')
+const { saveAvatar } = require('../controller/file.controller')
 const { avatarHandler } = require('../middleware/file.middleware')
-
+const { verifyAuth } = require('../middleware/auth.middleware')
 const fileRouter = new Router({
   prefix: '/api/v1/upload',
 })
-
-fileRouter.post('/avatar', avatarHandler, saveFile)
+/**
+ * @description 头像上传
+ * verifyAuth 暂时取消
+ */
+fileRouter.post('/avatar', verifyAuth, avatarHandler, saveAvatar)
 module.exports = fileRouter

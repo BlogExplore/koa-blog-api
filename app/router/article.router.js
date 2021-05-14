@@ -6,8 +6,9 @@ const router = new Router({
 })
 /**
  * @description 创建一篇文章
+ * 用户必须登录才可
  */
-router.post('/', verifyAuth, create)
+router.post('/', verifyAuth)
 
 /**
  * @description 获取所有的文章列表

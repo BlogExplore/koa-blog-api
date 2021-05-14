@@ -1,26 +1,34 @@
 const jwt = require('jsonwebtoken')
 const { UN_PERMISSION } = require('../constants/errorTypes')
+const {
+  pwdFail,
+  usernameNotExists,
+  permissionFail,
+} = require('../constants/errorInfo')
 const { PUBLIC_PEM } = require('../config/index')
 const userService = require('../service/user.service')
 const { SuccessModel, ErrorModel } = require('../core/ResModel')
-
+const doCrypto = require('../utils/crypto')
 const verifyLogin = async (ctx, next) => {
   const { username, password } = ctx.request.body
 
   const findUserArr = await userService.getUserInfo(username)
   if (findUserArr.length > 0) {
     // 用户名ok
-    ctx.user = findUserArr[0]
+
+    // 判断密码
+    const pwd = findUserArr[0]['password']
+
+    if (doCrypto(password) === pwd) {
+      ctx.user = findUserArr[0]
+      // return new SuccessModel()
+    } else {
+      // 密码错误
+      return new ErrorModel(pwdFail)
+    }
   } else {
     return new ErrorModel(usernameNotExists)
   }
-  // 判断密码
-
-  // if (passwordHandler(password) !== findUserArr[0].password) {
-  //   const error = new Error(PWD_IS_ERR)
-  //   return ctx.app.emit('error', error, ctx)
-  // }
-
   //
   await next()
 }
@@ -28,11 +36,10 @@ const verifyLogin = async (ctx, next) => {
 const verifyAuth = async (ctx, next) => {
   const authorization = ctx.headers.authorization
   if (!authorization) {
-    const error = new Error(UN_PERMISSION)
-    return ctx.app.emit('error', error, ctx)
+    ctx.body = new ErrorModel(permissionFail)
+    return
   }
   const token = authorization.replace('Bearer ', '')
-  console.log(token)
   try {
     const result = jwt.verify(token, PUBLIC_PEM, {
       algorithms: ['RS256'],
@@ -40,8 +47,8 @@ const verifyAuth = async (ctx, next) => {
     ctx.user = result
     await next()
   } catch (err) {
-    const error = new Error(UN_PERMISSION)
-    ctx.app.emit('error', error, ctx)
+    ctx.body = new ErrorModel(permissionFail)
+    return
   }
 }
 
