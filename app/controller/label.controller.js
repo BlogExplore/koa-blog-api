@@ -1,16 +1,17 @@
 const LabelService = require('../service/label.service')
+const { SuccessModel } = require('../core/ResModel')
 class LabelController {
   async create(ctx, next) {
     const { labelName } = ctx.request.body
     const res = await LabelService.create(labelName)
-
-    ctx.body = `创建标签成功`
+    console.log(res)
+    ctx.body = new SuccessModel()
   }
   async list(ctx, next) {
     const { limit, offset } = ctx.query
 
     const res = await LabelService.list(limit, offset)
-    ctx.body = res
+    ctx.body = new SuccessModel(res)
   }
 }
 
