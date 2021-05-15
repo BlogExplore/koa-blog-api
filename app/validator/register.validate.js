@@ -14,11 +14,6 @@ const SCHEMA = {
       maxLength: 255,
       minLength: 3,
     },
-    newPassword: {
-      type: 'string',
-      maxLength: 255,
-      minLength: 3,
-    },
     nickName: {
       type: 'string',
       maxLength: 255,
