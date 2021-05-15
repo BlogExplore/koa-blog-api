@@ -2,5 +2,6 @@ node_modules
 .env
 private.key
 public.pem
+uploads
 package-lock.json
 yarn-error.log
