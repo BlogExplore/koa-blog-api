@@ -16,6 +16,12 @@ class ArticleController {
 
     // ctx.body = new SuccessModel(res)
   }
+  async detail(ctx, next) {
+    const { articleId } = ctx.params.articleId
+    // 根据id查询
+    const res = await ArticleService.getInfoById(articleId)
+    ctx.body = res
+  }
 }
 
 module.exports = new ArticleController()

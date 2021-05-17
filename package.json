@@ -6,8 +6,16 @@
   "author": "vast <leaderywl@163.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon ./app/app.js"
+    "dev": "cross-env NODE_ENV=development nodemon ./app/app.js",
+    "prod": "cross-env NODE_ENV=production node ./app/app.js"
   },
+  "keywords": [
+    "vast",
+    "yayxs",
+    "koa-api",
+    "koa2",
+    "koa-blog"
+  ],
   "dependencies": {
     "@commitlint/cli": "^12.1.1",
     "@commitlint/config-conventional": "^12.1.1",
@@ -27,6 +35,7 @@
     "sequelize": "^6.6.2"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
     "nodemon": "^2.0.7"
   },
