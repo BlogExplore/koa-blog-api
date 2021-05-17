@@ -1,7 +1,7 @@
 const connection = require('../config/db')
 
 const sqlMap = {
-  create: `INSERT INTO articles (content, userId) VALUES (?, ?);`,
+  create: `INSERT INTO articles (title,content, summary,userId) VALUES (?, ?,?,?);`,
   list: `SELECT a.id id,a.content content,a.createAt createAt, a.updateAt updateAt,
   JSON_OBJECT('userId',u.id,'username',u.username) author
   FROM articles a
@@ -11,8 +11,13 @@ const sqlMap = {
 }
 
 class ArticleService {
-  async create(userId, con) {
-    const [res] = await connection.execute(sqlMap['create'], [con, userId])
+  async create({ title, content, summary, userId }) {
+    const [res] = await connection.execute(sqlMap['create'], [
+      title,
+      content,
+      summary,
+      userId,
+    ])
     return res
   }
   async list(offset, limit) {

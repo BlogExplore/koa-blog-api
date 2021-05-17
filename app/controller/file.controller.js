@@ -15,6 +15,12 @@ class FileController {
 
     ctx.body = new SuccessModel()
   }
+  async saveCover(ctx, next) {
+    const { filename, mimetype, size } = ctx.file // 封面的相关信息
+    const { id } = ctx.user // 用户id
+    console.log(id)
+    console.log(filename)
+  }
 }
 
 module.exports = new FileController()

@@ -3,8 +3,8 @@ const { SuccessModel } = require('../core/ResModel')
 class ArticleController {
   async create(ctx, next) {
     const userId = ctx.user.id // 用户id
-    const content = ctx.request.body.content // 内容
-    const res = await ArticleService.create(userId, content)
+    const { title, content, summary } = ctx.request.body // 内容
+    const res = await ArticleService.create({ title, content, summary, userId })
     ctx.body = new SuccessModel(res)
   }
 
