@@ -22,6 +22,12 @@ class UserController {
       return new ErrorModel(usernameNotExists)
     }
   }
+
+  async list(ctx, next){
+    const { limit, offset } = ctx.query
+    const res = await userService.list(limit, offset)
+    ctx.body = new SuccessModel(res)
+  }
 }
 
 module.exports = new UserController()

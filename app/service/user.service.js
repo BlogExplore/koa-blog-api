@@ -7,7 +7,10 @@ const sqlMap = new Map([
     `INSERT INTO users (username, password,gender) VALUES (?, ?, ?);`,
   ],
   ['getUserInfo', `SELECT * FROM users WHERE username = ?;`],
-  ['list', `SELECT u.id id,u.username username,FROM users u LIMIT ?, ?;`],
+  [
+    'list',
+    `SELECT u.id id,u.username username,u.avatarUrl avatarUrl,u.nickName nickName  FROM users u LIMIT ?, ?;`,
+  ],
 ])
 
 class UserService {
@@ -40,6 +43,17 @@ class UserService {
       return [formatRes]
     } catch (error) {
       console.log(error)
+    }
+  }
+  async list(limit, offset) {
+    try {
+      const [res] = await connection.execute(sqlMap.get('list'), [
+        offset,
+        limit,
+      ])
+      return res
+    } catch (err) {
+      console.log(err)
     }
   }
 }
