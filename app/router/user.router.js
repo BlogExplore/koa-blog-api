@@ -57,6 +57,6 @@ userRouter.post('/login', genValidator(loginValidate), verifyLogin, login)
  * @descript 获取所有的用户
  * 不需要登录
  */
-userRouter.get('/', list)
+userRouter.get('/',verifyAuth, list)
 
 module.exports = userRouter

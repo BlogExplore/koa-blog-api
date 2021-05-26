@@ -7,7 +7,9 @@ class ArticleController {
     const res = await ArticleService.create({ title, content, summary, userId })
     ctx.body = new SuccessModel(res)
   }
-
+  /**
+   * @description 分页获取列表
+   */
   async list() {
     const { offset, limit } = ctx.query
     // 列表查询
