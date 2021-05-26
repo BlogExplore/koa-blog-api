@@ -20,8 +20,7 @@ router.post('/', verifyAuth, create)
 router.get('/', list)
 
 /**
- * @description 获取文章id获取详情
+ * @description 根据文章id获取详情
  */
-
 router.get('/:articleId', detail)
 module.exports = router

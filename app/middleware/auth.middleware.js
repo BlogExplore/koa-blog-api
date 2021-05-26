@@ -12,34 +12,27 @@ const doCrypto = require('../utils/crypto')
 const verifyLogin = async (ctx, next) => {
   const { username, password } = ctx.request.body
 
-  console.log('用户名',username)
-  console.log('密码',password)
-  try{
+  try {
     const findUserArr = await userService.getUserInfo(username)
-    console.log('找到的用户',findUserArr)
-  if (findUserArr.length > 0) {
-    // 用户名ok
+    if (findUserArr.length > 0) {
+      // 用户名ok
 
-    // 判断密码
-    const pwd = findUserArr[0]['password']
+      // 判断密码
+      const pwd = findUserArr[0]['password']
 
-    if (doCrypto(password) === pwd) {
-      console.log('密码也是正确')
-      ctx.user = findUserArr[0]
-      // return new SuccessModel()
+      if (doCrypto(password) === pwd) {
+        ctx.user = findUserArr[0]
+        // return new SuccessModel()
+      } else {
+        // 密码错误
+        return new ErrorModel(pwdFail)
+      }
     } else {
-      // 密码错误
-      return new ErrorModel(pwdFail)
+      return new ErrorModel(usernameNotExists)
     }
-  } else {
-    return new ErrorModel(usernameNotExists)
-  }
-  //
-  await next()
-  }catch(err){
-
-  }
-  
+    //
+    await next()
+  } catch (err) {}
 }
 
 const verifyAuth = async (ctx, next) => {

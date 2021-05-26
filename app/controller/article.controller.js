@@ -10,19 +10,20 @@ class ArticleController {
   /**
    * @description 分页获取列表
    */
-  async list() {
+  async list(ctx, next) {
     const { offset, limit } = ctx.query
-    // 列表查询
-    console.log(offset, limit)
-    // const res = await ArticleService.list(offset, limit)
-
-    // ctx.body = new SuccessModel(res)
+    try {
+      const res = await ArticleService.list({ offset, limit })
+      ctx.body = new SuccessModel(res)
+    } catch (error) {}
   }
   async detail(ctx, next) {
-    const { articleId } = ctx.params.articleId
-    // 根据id查询
-    const res = await ArticleService.getInfoById(articleId)
-    ctx.body = res
+    const { articleId } = ctx.params
+    try {
+      // 根据id查询
+      const res = await ArticleService.getInfoById(articleId)
+      ctx.body = new SuccessModel(res)
+    } catch (error) {}
   }
 }
 

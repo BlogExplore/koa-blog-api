@@ -15,7 +15,6 @@ class CommentController {
     ctx.body = res
   }
   async list(ctx, next) {
-    console.log(123)
     const { articleId } = ctx.query // 文章ID
 
     const result = await service.getCommentsArticleId(articleId)
