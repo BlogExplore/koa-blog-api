@@ -13,16 +13,7 @@ const SCHEMA = {
       type: 'string',
       maxLength: 255,
       minLength: 3,
-    },
-    nickName: {
-      type: 'string',
-      maxLength: 255,
-    },
-    gender: {
-      type: 'number',
-      minimum: 1,
-      maximum: 3,
-    },
+    }
   },
 }
 

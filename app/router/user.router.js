@@ -31,11 +31,10 @@ userRouter.post(
   whetherUsernameAlreadyExists,
   passwordEncryption,
   async (ctx, next) => {
-    const { username, password, gender } = ctx.request.body
+    const { username, password } = ctx.request.body
     ctx.body = await register({
       username,
-      password,
-      gender,
+      password
     })
   }
 )

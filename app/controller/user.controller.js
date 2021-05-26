@@ -3,10 +3,10 @@ const userService = require('../service/user.service')
 const { ErrorModel, SuccessModel } = require('../core/ResModel')
 const { registerFail, usernameNotExists } = require('../constants/errorInfo')
 class UserController {
-  async register({ username, password, gender }) {
+  async register({ username, password }) {
     // 新增用户
     try {
-      await userService.createUser({ username, password, gender })
+      await userService.createUser({ username, password })
       return new SuccessModel()
     } catch (error) {
       console.error(error.message, error.stack)

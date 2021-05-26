@@ -4,7 +4,7 @@ const { _formatUser } = require('../utils/formatUser')
 const sqlMap = new Map([
   [
     'createUser',
-    `INSERT INTO users (username, password,gender) VALUES (?, ?, ?);`,
+    `INSERT INTO users (username, password) VALUES (?, ?);`,
   ],
   ['getUserInfo', `SELECT * FROM users WHERE username = ?;`],
   [
@@ -19,7 +19,6 @@ class UserService {
     const result = await connection.execute(sqlMap.get('createUser'), [
       username,
       password,
-      gender,
     ])
     return result[0]
   }
