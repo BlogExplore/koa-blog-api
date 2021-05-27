@@ -14,6 +14,10 @@ fileRouter.post('/avatar', verifyAuth, avatarHandler, saveAvatar)
 
 /**
  * @description 添加文章封面
+ * 一张图片
+ * 需要登录
+ * 暂时不需要预览图片
+ * 开始保存
  */
 fileRouter.post('/cover', verifyAuth, coverHandler, saveCover)
 module.exports = fileRouter

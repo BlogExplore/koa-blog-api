@@ -2,6 +2,7 @@ const connection = require('../config/db')
 const sql = {
   createAvatar: `INSERT INTO avatars (filename, mimetype, size, userId) VALUES (?, ?, ?, ?)`,
   updateAvatarByUserId: `UPDATE users SET avatarUrl = ? WHERE id = ?;`,
+  createCover: `INSERT INTO files (filename, mimetype, size, userId, articleId) VALUES (?, ?, ?, ?, ?)`,
 }
 class FileService {
   async createAvatar({ filename, mimetype, size, id }) {
@@ -19,6 +20,11 @@ class FileService {
       id,
     ])
     return res
+  }
+  async saveCover({ filename, mimetype, size, id, articleId }) {
+    try {
+      const res = await connection.execute(sql.createCover)
+    } catch (error) {}
   }
 }
 
