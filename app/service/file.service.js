@@ -21,9 +21,24 @@ class FileService {
     ])
     return res
   }
-  async saveCover({ filename, mimetype, size, id, articleId }) {
+  async saveCover({ filename, mimetype, size, id: userId, articleId }) {
     try {
-      const res = await connection.execute(sql.createCover)
+      const [res] = await connection.execute(sql.createCover, [
+        filename,
+        mimetype,
+        size,
+        userId,
+        articleId,
+      ])
+
+      return res
+    } catch (error) {}
+  }
+  async getFileByFilename(filename) {
+    const statement = `SELECT * FROM files WHERE filename = ?;`
+    try {
+      const [result] = await connection.execute(statement, [filename])
+      return result[0]
     } catch (error) {}
   }
 }

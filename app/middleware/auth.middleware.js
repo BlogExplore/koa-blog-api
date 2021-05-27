@@ -54,7 +54,12 @@ const verifyAuth = async (ctx, next) => {
   }
 }
 
+const verifyPermission = async (ctx, next) => {
+  const keys = Object.keys(ctx.params)
+}
+
 module.exports = {
   verifyLogin,
   verifyAuth,
+  verifyPermission,
 }
