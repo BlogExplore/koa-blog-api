@@ -1,11 +1,11 @@
 const service = require('../service/comment.service')
-
+const { SuccessModel } = require('../core/ResModel')
 class CommentController {
   async create(ctx, next) {
     const userId = ctx.user.id // 用户id
     const { articleId, content } = ctx.request.body // 文章id 评论的内容
     const result = await service.create({ articleId, content, userId })
-    ctx.body = result
+    ctx.body = new SuccessModel(result)
   }
   async doReply(ctx, next) {
     const { articleId, content } = ctx.request.body // 文章id 和内容

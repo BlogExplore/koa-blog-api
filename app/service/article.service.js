@@ -1,11 +1,11 @@
 const connection = require('../config/db')
 
 const sqlMap = {
-  create: `INSERT INTO articles (title,content, summary,userId) VALUES (?, ?,?,?);`,
+  create: `INSERT INTO articles (title,content, summary,userId,coverImg,labelIds) VALUES (?, ?,?,?,?,?);`,
   list: `  SELECT a.id id,a.title title,a.summary summary, a.content content,a.createAt createAt, a.updateAt updateAt,
   JSON_OBJECT('userId',u.id,'username',u.username) author,
 	(SELECT COUNT(*) FROM articles_labels al WHERE al.articleId = a.id) labelCount,
-	(SELECT CONCAT('http://127.0.0.1:2222/api/v1/article/cover/', files.filename)
+	(SELECT CONCAT('http://127.0.0.1:3009/api/v1/article/cover/', files.filename)
         FROM files WHERE a.id = files.articleId) coverImg
   FROM articles a
   LEFT JOIN users u ON a.userId = u.id
@@ -19,12 +19,14 @@ GROUP BY a.id;
 }
 
 class ArticleService {
-  async create({ title, content, summary, userId }) {
+  async create({ title, content, summary, userId, labelIds, coverImg }) {
     const [res] = await connection.execute(sqlMap['create'], [
       title,
       content,
       summary,
       userId,
+      labelIds,
+      coverImg,
     ])
     return res
   }

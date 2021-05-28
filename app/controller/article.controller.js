@@ -7,8 +7,15 @@ const fs = require('fs')
 class ArticleController {
   async create(ctx, next) {
     const userId = ctx.user.id // 用户id
-    const { title, content, summary } = ctx.request.body // 内容
-    const res = await articleService.create({ title, content, summary, userId })
+    const { title, content, summary, labelIds, coverImg } = ctx.request.body // 内容
+    const res = await articleService.create({
+      title,
+      content,
+      summary,
+      userId,
+      coverImg,
+      labelIds,
+    })
     ctx.body = new SuccessModel(res)
   }
   /**

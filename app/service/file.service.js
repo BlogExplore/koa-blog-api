@@ -2,7 +2,7 @@ const connection = require('../config/db')
 const sql = {
   createAvatar: `INSERT INTO avatars (filename, mimetype, size, userId) VALUES (?, ?, ?, ?)`,
   updateAvatarByUserId: `UPDATE users SET avatarUrl = ? WHERE id = ?;`,
-  createCover: `INSERT INTO files (filename, mimetype, size, userId, articleId) VALUES (?, ?, ?, ?, ?)`,
+  createCover: `INSERT INTO files (filename, mimetype, size, userId) VALUES (?, ?, ?, ?)`,
 }
 class FileService {
   async createAvatar({ filename, mimetype, size, id }) {
@@ -21,17 +21,17 @@ class FileService {
     ])
     return res
   }
-  async saveCover({ filename, mimetype, size, id: userId, articleId }) {
+  async saveCover({ filename, mimetype, size, id: userId }) {
     try {
       const [res] = await connection.execute(sql.createCover, [
         filename,
         mimetype,
         size,
         userId,
-        articleId,
       ])
-
-      return res
+      console.log('文件名字', filename)
+      const fileInfo = await this.getFileByFilename(filename)
+      return fileInfo
     } catch (error) {}
   }
   async getFileByFilename(filename) {

@@ -18,14 +18,15 @@ class FileController {
   async saveCover(ctx, next) {
     const { filename, mimetype, size } = ctx.file // 封面的相关信息
     const { id } = ctx.user // 用户id
-    const { articleId } = ctx.query
-    console.log(id)
-    console.log(filename)
-    console.log(articleId)
+    // const { articleId } = ctx.query // 没有文章的id
+
     // 文件信息入库
     try {
-      await fileService.saveCover({ filename, mimetype, size, id, articleId })
-      ctx.body = new SuccessModel()
+      await fileService.saveCover({ filename, mimetype, size, id })
+      const coverImg = `${APP_HOST}:${APP_PORT}/api/v1/article/cover/${filename}`
+      ctx.body = new SuccessModel({
+        coverImg,
+      })
     } catch (error) {}
   }
 }
