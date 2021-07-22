@@ -1,6 +1,6 @@
 {
   "name": "koa-blog-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Service api for nuxt-blog-web",
   "repository": "https://github.com/BlogExplore/koa-blog-api.git",
   "author": "vast <leaderywl@163.com>",
