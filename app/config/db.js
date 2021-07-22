@@ -14,8 +14,6 @@ const connection = mysql.createPool({
   password: MYSQL_PASSWORD,
 })
 connection.getConnection((err, con) => {
-  console.log('--11', err)
-  console.log('--22', con)
   con.connect((err) => {
     if (err) {
       console.log('mysql connec error')
